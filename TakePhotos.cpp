@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QPainter>
 #include <qstandardpaths.h>
+#include <QDateTime>
 #ifdef _MSC_VER
     #pragma execution_character_set("utf-8")
 #endif
@@ -131,6 +132,7 @@ void TakePhotos::GetInfo()
 	idreader::IDCardReader idr;
 	if (idr.errCode == 0)
 	{
+        isExpired(QString::fromLocal8Bit(idr.expireEnd.c_str()));
 		QImage* img = new QImage;
 
 		if (!(img->load("./photo.bmp"))) //加载图像
@@ -217,6 +219,7 @@ void TakePhotos::PutTextToImg(cv::Mat & img)
         string text=QString("本照片用于办理无卡结算备案").toLocal8Bit().data();
         putTextZH(img, text.c_str(), cv::Point(x, y), cv::Scalar(b, g, r), fontSize, fontType.c_str());
     }
+    putTextZH(img,QDateTime::currentDateTime().toString().toLocal8Bit(), cv::Point(325,450),cv::Scalar(b, g, r),20,"Arial");
 }
 
 void TakePhotos::InitSettings()
@@ -293,6 +296,7 @@ void TakePhotos::GetAgentInfo()
 	idreader::IDCardReader idr;
 	if (idr.errCode == 0)
 	{
+        isExpired(QString::fromLocal8Bit(idr.expireEnd.c_str()));
 		QImage* img = new QImage;
 
 		if (!(img->load("./photo.bmp"))) //加载图像
@@ -880,4 +884,16 @@ void TakePhotos::OpenHistoryDig()
     historyTable=new ServiceTimeLineTable();
     historyTable->setWindowFlags(historyTable->windowFlags() &~ Qt::WindowMaximizeButtonHint);
     historyTable->exec();
+}
+
+void TakePhotos::isExpired(QString expdate)
+{
+    QDateTime expDateTime=QDateTime::fromString(expdate,"yyyyMMdd");
+    if(expDateTime.isValid())
+    {
+        if(expDateTime.addDays(1).addMSecs(-1)<QDateTime::currentDateTime())
+        {
+            QMessageBox::warning(this,tr("Warning"),tr("ID card expired!"),QMessageBox::Ok);
+        }
+    }
 }

@@ -24,7 +24,7 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
 
 
     ui->tableWidget->setRowCount(0);
-    ui->tableWidget->setColumnCount(6);
+    ui->tableWidget->setColumnCount(7);
     //ui->tableWidget->setHorizontalHeaderLabels(header);
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
@@ -34,6 +34,7 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
     ui->tableWidget->verticalHeader()->setHidden(true);
     ui->tableWidget->setColumnWidth(2,150);
     ui->tableWidget->setColumnWidth(4,150);
+    ui->tableWidget->setColumnWidth(5,150);
     //tableWidget->setHorizontalHeaderLabels(header);
     SetHerader();
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Search()));
@@ -200,7 +201,27 @@ void ServiceTimeLineTable::FillinTable(QString json)
                         }
                     }
                 }
-
+                if(history.contains("serviceType"))
+                {
+                    QJsonValue serviceType = history.value("serviceType");
+                    if(serviceType.isDouble())
+                    {
+                        switch (serviceType.toInt())
+                        {
+                            case 0:
+                                ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,6,new QTableWidgetItem(tr("Reset password")));
+                                break;
+                            case 1:
+                                ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,6,new QTableWidgetItem(tr("Relieves loss")));
+                                break;
+                            case 2:
+                                ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,6,new QTableWidgetItem(tr("Free settlement record")));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
                 //ui->tableWidget->item(ui->tableWidget->rowCount(),1)->setText(QString::number(id.toInt()));
                 //ui->tableWidget->cellWidget(ui->tableWidget->rowCount()-1,1)=new QTableWidgetItem(id.toInt());
             }
@@ -231,6 +252,7 @@ void ServiceTimeLineTable::SetHerader()
     header.append(tr("Agent Name"));
     header.append(tr("Agent Code"));
     header.append(tr("Update Time"));
+    header.append(tr("Type"));
 
     ui->tableWidget->setHorizontalHeaderLabels(header);
 }

@@ -59,6 +59,7 @@ private:
     ServiceTimeLineTable *historyTable;
 
 	bool SaveTmpFile();
+    void isExpired(QString expdate);
 public slots:
 	void GetInfo();
 	void CleanInfo();
