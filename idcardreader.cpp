@@ -8,7 +8,7 @@
 namespace idreader
 {
 
-char * gfolk[] = {
+const char * gfolk[] = {
 "汉",
 "蒙古",
 "回",
@@ -302,7 +302,7 @@ char * gfolk[] = {
                                  char *BirthDay, char * Code, char * Address,
                                  char *Agency, char * ExpireStart, char* ExpireEnd)
     {
-          int type = 1;
+          //int type = 1;
           int i;
 
           FILE * fp = fopen ( filewlt, "wb+");
@@ -317,7 +317,7 @@ char * gfolk[] = {
                 return 0;
           }
           unsigned char * pChar= uchRespond;
-          int offset = 0;
+          //int offset = 0;
 
           memset (Name, 0, 31);
           WideCharToMultiByte ( CP_ACP, 0, (LPCWSTR)pChar,
@@ -341,7 +341,7 @@ char * gfolk[] = {
           char _folk[4];
           memset (_folk, 0, 4);
           WideCharToMultiByte (CP_ACP, 0, (LPCWSTR)pChar, 2, _folk, 2, NULL, NULL);
-          char * pfolk = gfolk[atoi( _folk) - 1];
+          const char * pfolk = gfolk[atoi( _folk) - 1];
           memset ( Folk, 0, 10 );
           memcpy ( (void*)Folk, (void*)pfolk, strlen(pfolk) );
           pChar += 4;

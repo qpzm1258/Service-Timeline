@@ -7,8 +7,8 @@
 IDI_ICON1	ICON	DISCARDABLE	"D:/Repo/test/TakePhotos/TakePhotos.ico"
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 1,5,2,0
-	PRODUCTVERSION 1,5,2,0
+	FILEVERSION 1,6,0,0
+	PRODUCTVERSION 1,6,0,0
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -25,11 +25,11 @@ VS_VERSION_INFO VERSIONINFO
 			BEGIN
 				VALUE "CompanyName", "NNSI\0"
 				VALUE "FileDescription", "Service TimeLine\0"
-				VALUE "FileVersion", "1.5.2.0\0"
+				VALUE "FileVersion", "1.6.0.0\0"
 				VALUE "LegalCopyright", "Copyright 2018 qpzm1258 All rights reserved.\0"
 				VALUE "OriginalFilename", "TakePhotos.exe\0"
 				VALUE "ProductName", "Service TimeLine\0"
-				VALUE "ProductVersion", "1.5.2.0\0"
+				VALUE "ProductVersion", "1.6.0.0\0"
 			END
 		END
 		BLOCK "VarFileInfo"

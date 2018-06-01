@@ -506,7 +506,11 @@ void TakePhotos::SwitchCamera()
 
 void TakePhotos::SwitchType()
 {
-	workType = ui.comboBox_2->currentIndex();
+    if(timer->isActive())
+    {
+        workType = ui.comboBox_2->currentIndex();
+        NextFrame();
+    }
 }
 
 void TakePhotos::ShowFontSettings()
@@ -609,10 +613,12 @@ void TakePhotos::CleanAll()
 	if (!timer->isActive())
 	{
 		timer->start();
+        ui.comboBox_2->setEnabled(true);
 		ui.takePhotoBtn->setText(tr("Take Photo"));
 	}
 	CleanAgentInfo();
 	CleanInfo();
+    ui.tabWidget->setCurrentIndex(0);
 }
 
 void TakePhotos::TakeOrCleanPhoto()
@@ -620,11 +626,13 @@ void TakePhotos::TakeOrCleanPhoto()
 	if (timer->isActive())
 	{
 		timer->stop();
+        ui.comboBox_2->setEnabled(false);
 		ui.takePhotoBtn->setText(tr("Clean Photo"));
 	}
 	else
 	{
 		timer->start();
+        ui.comboBox_2->setEnabled(true);
 		ui.takePhotoBtn->setText(tr("Take Photo"));
 	}
 }
@@ -840,13 +848,13 @@ bool TakePhotos::SaveTmpFile()
 	{
 		agentjpg.remove();
 	}
-	bool handleIsSave=handleImg->save(QString::fromStdString(tempPath + "/handle.jpg"),"jpg");
+    bool handleIsSave=handleImg->save(QString::fromStdString(tempPath + "/handle.jpg"),"jpg",100);
 	submitData->AppendFile("HandlePhoto", QString::fromStdString(tempPath + "/handle.jpg"));
     bool transactorIsSave = false;
     //QMessageBox::critical(this,"test","4");
 	if (transactorPhoto != NULL && !transactorPhoto->isNull())
 	{
-		transactorIsSave = transactorPhoto->save(QString::fromStdString(tempPath + "/transactor.jpg"), "jpg");
+        transactorIsSave = transactorPhoto->save(QString::fromStdString(tempPath + "/transactor.jpg"), "jpg",100);
 		submitData->AppendFile("Photo", QString::fromStdString(tempPath + "/transactor.jpg"));
 
 	}
@@ -854,19 +862,19 @@ bool TakePhotos::SaveTmpFile()
     //QMessageBox::critical(this,"test","5");
 	if (agentPhtot != NULL && !agentPhtot->isNull())
 	{
-		agentIsSave = agentPhtot->save(QString::fromStdString(tempPath + "/agent.jpg"), "jpg");
+        agentIsSave = agentPhtot->save(QString::fromStdString(tempPath + "/agent.jpg"), "jpg",100);
 		submitData->AppendFile("AgentPhoto", QString::fromStdString(tempPath + "/agent.jpg"));
 	}
     //QMessageBox::critical(this,"test","6");
     if (idImage != NULL && !idImage->isNull())
     {
-        idImage->save(QString::fromStdString(tempPath + "/idImage.jpg"), "jpg");
+        idImage->save(QString::fromStdString(tempPath + "/idImage.jpg"), "jpg",100);
         submitData->AppendFile("IDCardImage", QString::fromStdString(tempPath + "/idImage.jpg"));
     }
     //QMessageBox::critical(this,"test","7");
     if (agentIdImage != NULL && !agentIdImage->isNull())
     {
-        agentIdImage->save(QString::fromStdString(tempPath + "/agentIdImage.jpg"), "jpg");
+        agentIdImage->save(QString::fromStdString(tempPath + "/agentIdImage.jpg"), "jpg",100);
         submitData->AppendFile("AgentIDCardImage", QString::fromStdString(tempPath + "/agentIdImage.jpg"));
     }
     //QMessageBox::critical(this,"test","8");
@@ -883,7 +891,7 @@ void TakePhotos::OpenHistoryDig()
 {
     historyTable=new ServiceTimeLineTable();
     historyTable->setWindowFlags(historyTable->windowFlags() &~ Qt::WindowMaximizeButtonHint);
-    historyTable->exec();
+    historyTable->show();
 }
 
 void TakePhotos::isExpired(QString expdate)

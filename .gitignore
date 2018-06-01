@@ -13,3 +13,5 @@ debug
 object_script.TakePhotos.Debug
 object_script.TakePhotos.Release
 Makefile*
+*.jpg
+*.bmp

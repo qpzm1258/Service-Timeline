@@ -6,6 +6,9 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QJsonObject>
+#include <QContextMenuEvent>
+#include <QTableWidgetItem>
+#include <QPoint>
 #include <string>
 #include "submitdata.h"
 
@@ -21,7 +24,9 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
 //    header.append(tr("Agent Name"));
 //    header.append(tr("Agent Code"));
 //    header.append(tr("Update Time"));
-
+    viewer=new HistoryViewer();
+    menu=new QMenu();
+    viewPhoto=new QAction(tr("Display Photos"));
 
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnCount(7);
@@ -39,6 +44,7 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
     SetHerader();
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Search()));
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(clear()));
+    connect(this->viewPhoto,SIGNAL(triggered()),this,SLOT(DisplayPhotos()));
 }
 
 ServiceTimeLineTable::~ServiceTimeLineTable()
@@ -266,4 +272,131 @@ void ServiceTimeLineTable::clear()
     ui->tableWidget->clear();
     ui->tableWidget->setRowCount(0);
     SetHerader();
+}
+
+void ServiceTimeLineTable::contextMenuEvent(QContextMenuEvent *event)
+{
+    menu->clear(); //清除原有菜单
+    //QPoint point = event->pos(); //得到窗口坐标
+    //QTableWidgetItem *item = ui->tableWidget->itemAt(point);
+    menu->addAction(viewPhoto);
+    menu->exec(QCursor::pos());
+    event->accept();
+}
+
+void ServiceTimeLineTable::DisplayPhotos()
+{
+    QList<QTableWidgetItem*>items = ui->tableWidget->selectedItems();
+    if(items.count()<1)
+    {
+        return;
+    }
+    QSettings *settings=new QSettings(QCoreApplication::applicationDirPath() + "/Settings.ini", QSettings::IniFormat);
+    if (!settings->contains("ServerAddress"))
+    {
+        QMessageBox::critical(this,tr("Error"),tr("Please set server address"));
+        return;
+    }
+    string url = settings->value("ServerAddress").toString().toLocal8Bit().data();
+    SubmitData *submit=new SubmitData(url,this);
+    submit->AppendText("id",items.at(0)->text());
+    submit->CustomSubmit("/api/History");
+    if(!submit->Result())
+    {
+        QMessageBox::critical(this,tr("Error"),QString::fromStdString(submit->Response()));
+        return;
+    }
+    QString handlePhoto;
+    QString transactorCard;
+    QString agentCard;
+    QString json=QString::fromUtf8(submit->Response().data());
+    QJsonParseError e;
+    //QString jsonStr = QString::fromUtf8(response.data());
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(json.toUtf8(), &e);
+    if (e.error == QJsonParseError::NoError && !jsonDoc.isNull())
+    {
+        if (jsonDoc.isArray())
+        {
+            QJsonArray array = jsonDoc.array();
+            int nSize = array.size();  // 获取数组大小
+            if(nSize!=1)
+            {
+                QMessageBox::critical(this,tr("Error"),tr("Data error!"));
+                return;
+            }
+            QJsonValue value = array.at(0);
+            if(!value.isObject())
+            {
+                QMessageBox::critical(this,tr("Error"),tr("Return json format error!"));
+                return;
+            }
+            QJsonObject history=value.toObject();
+            if(history.contains("updateTime"))
+            {
+                QJsonValue updateTime = history.value("updateTime");
+                if(updateTime.isString())
+                {
+                    QString timeStr=updateTime.toString().replace("T"," ").section(".",0,0).trimmed();
+                    QDateTime time = QDateTime::fromString(timeStr,"yyyy-MM-dd HH:mm:ss");
+                    if(history.contains("handlePhotoGuid"))
+                    {
+                        QJsonValue handlePhotoGuid = history.value("handlePhotoGuid");
+                        if(handlePhotoGuid.isString())
+                        {
+                            handlePhoto=("http://"+url).c_str()+QString::fromLocal8Bit("/Uploads/HandlePhoto/")+time.toString("yyyy/M/d/")+handlePhotoGuid.toString()+".jpg";
+                        }
+                    }
+                }
+            }
+
+            if(history.contains("transactorInfo"))
+            {
+                QJsonValue transactorInfo = history.value("transactorInfo");
+                if(transactorInfo.isObject())
+                {
+                    QJsonObject transactor = transactorInfo.toObject();
+                    if(transactor.contains("cardImageGuid"))
+                    {
+                        QJsonValue imageGuid = transactor.value("cardImageGuid");
+                        if(imageGuid.isString())
+                        {
+                            transactorCard=("http://"+url).c_str()+QString::fromLocal8Bit("/Uploads/CardInfo/CardImage/")+imageGuid.toString()+".jpg";
+                        }
+                    }
+                }
+            }
+            if(history.contains("agentInfo"))
+            {
+                QJsonValue agentInfo = history.value("agentInfo");
+                if(agentInfo.isObject())
+                {
+                    QJsonObject agent = agentInfo.toObject();
+                    if(agent.contains("cardImageGuid"))
+                    {
+                        QJsonValue imageGuid = agent.value("cardImageGuid");
+                        if(imageGuid.isString())
+                        {
+                            agentCard=("http://"+url).c_str()+QString::fromLocal8Bit("/Uploads/CardInfo/CardImage/")+imageGuid.toString()+".jpg";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    viewer->Clear();
+    if((!handlePhoto.isNull())&&(!handlePhoto.isEmpty()))
+    {
+        viewer->SetHandlePhotoURL(handlePhoto);
+    }
+    if((!transactorCard.isNull())&&(!transactorCard.isEmpty()))
+    {
+        viewer->SetTransactorCardImageURL(transactorCard);
+    }
+    if((!agentCard.isNull())&&(!agentCard.isEmpty()))
+    {
+        viewer->SetAgentCardImageURL(agentCard);
+    }
+    viewer->show();
+
 }

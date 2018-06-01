@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,8 +20,9 @@ SOURCES += main.cpp\
         serversettings.cpp \
         submitdata.cpp \
         textsettings.cpp \
-    idcardmessage.cpp \
-    servicetimelinetable.cpp
+        idcardmessage.cpp \
+        servicetimelinetable.cpp \
+        historyviewer.cpp
 
 HEADERS  += TakePhotos.h \
         checkstatus.h \
@@ -30,13 +31,15 @@ HEADERS  += TakePhotos.h \
         serversettings.h \
         submitdata.h \
         textsettings.h \
-    idcardmessage.h \
-    servicetimelinetable.h
+        idcardmessage.h \
+        servicetimelinetable.h \
+        historyviewer.h
 
 FORMS    += TakePhotos.ui \
             textsettings.ui \
             serversettings.ui \
-    servicetimelinetable.ui
+            servicetimelinetable.ui \
+            historyviewer.ui
 
 INCLUDEPATH += . \
     ../Curl/include \
