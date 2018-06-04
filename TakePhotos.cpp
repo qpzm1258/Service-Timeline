@@ -33,7 +33,7 @@ TakePhotos::TakePhotos(QWidget *parent)
 	cameraStatusLabel = new QLabel(tr("Camera status: Error"));
 	checker = new CheckStatus(url,NULL);
 	serverCheckerTimer = new QTimer();
-	serverCheckerTimer->setInterval(1000 * 10);
+    serverCheckerTimer->setInterval(1000 * 60);
 	connect(serverCheckerTimer, SIGNAL(timeout()), checker, SLOT(OnTimeOut()));
 	connect(checker, SIGNAL(ServerOk(bool)), this, SLOT(ChangeServerStatus(bool)));
 	checker->OnTimeOut();

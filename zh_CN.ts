@@ -90,7 +90,7 @@
     </message>
     <message>
         <location filename="servicetimelinetable.ui" line="29"/>
-        <location filename="servicetimelinetable.cpp" line="257"/>
+        <location filename="servicetimelinetable.cpp" line="272"/>
         <source>Code</source>
         <translation>身份证号</translation>
     </message>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <location filename="servicetimelinetable.ui" line="46"/>
-        <location filename="servicetimelinetable.cpp" line="256"/>
+        <location filename="servicetimelinetable.cpp" line="271"/>
         <source>Name</source>
         <translation>姓名</translation>
     </message>
@@ -121,107 +121,127 @@
         <translation>清除查询条件</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="29"/>
+        <location filename="servicetimelinetable.cpp" line="30"/>
         <source>Display Photos</source>
         <translation>查看图片</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="65"/>
-        <location filename="servicetimelinetable.cpp" line="82"/>
-        <location filename="servicetimelinetable.cpp" line="88"/>
-        <location filename="servicetimelinetable.cpp" line="94"/>
-        <location filename="servicetimelinetable.cpp" line="104"/>
-        <location filename="servicetimelinetable.cpp" line="124"/>
-        <location filename="servicetimelinetable.cpp" line="132"/>
-        <location filename="servicetimelinetable.cpp" line="138"/>
-        <location filename="servicetimelinetable.cpp" line="144"/>
-        <location filename="servicetimelinetable.cpp" line="237"/>
-        <location filename="servicetimelinetable.cpp" line="247"/>
-        <location filename="servicetimelinetable.cpp" line="297"/>
-        <location filename="servicetimelinetable.cpp" line="306"/>
-        <location filename="servicetimelinetable.cpp" line="325"/>
-        <location filename="servicetimelinetable.cpp" line="331"/>
+        <location filename="servicetimelinetable.cpp" line="32"/>
+        <source>Copy transactor name</source>
+        <translation>复制办理人姓名</translation>
+    </message>
+    <message>
+        <location filename="servicetimelinetable.cpp" line="34"/>
+        <source>Copy transactor code</source>
+        <translation>复制办理人身份证号</translation>
+    </message>
+    <message>
+        <location filename="servicetimelinetable.cpp" line="36"/>
+        <source>Copy agent name</source>
+        <translation>复制代办人姓名</translation>
+    </message>
+    <message>
+        <location filename="servicetimelinetable.cpp" line="38"/>
+        <source>Copy agent code</source>
+        <translation>复制代办人身份证号</translation>
+    </message>
+    <message>
+        <location filename="servicetimelinetable.cpp" line="80"/>
+        <location filename="servicetimelinetable.cpp" line="97"/>
+        <location filename="servicetimelinetable.cpp" line="103"/>
+        <location filename="servicetimelinetable.cpp" line="109"/>
+        <location filename="servicetimelinetable.cpp" line="119"/>
+        <location filename="servicetimelinetable.cpp" line="139"/>
+        <location filename="servicetimelinetable.cpp" line="147"/>
+        <location filename="servicetimelinetable.cpp" line="153"/>
+        <location filename="servicetimelinetable.cpp" line="159"/>
+        <location filename="servicetimelinetable.cpp" line="252"/>
+        <location filename="servicetimelinetable.cpp" line="262"/>
+        <location filename="servicetimelinetable.cpp" line="337"/>
+        <location filename="servicetimelinetable.cpp" line="346"/>
+        <location filename="servicetimelinetable.cpp" line="365"/>
+        <location filename="servicetimelinetable.cpp" line="371"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="65"/>
-        <location filename="servicetimelinetable.cpp" line="297"/>
+        <location filename="servicetimelinetable.cpp" line="80"/>
+        <location filename="servicetimelinetable.cpp" line="337"/>
         <source>Please set server address</source>
         <translation>请配置服务器地址</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="82"/>
+        <location filename="servicetimelinetable.cpp" line="97"/>
         <source>Start time set invalid</source>
         <translation>开始时间错误</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="88"/>
+        <location filename="servicetimelinetable.cpp" line="103"/>
         <source>End time set invalid</source>
         <translation>结束时间错误</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="94"/>
+        <location filename="servicetimelinetable.cpp" line="109"/>
         <source>End time must later then start</source>
         <translation>结束时间必须晚于开始时间</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="124"/>
+        <location filename="servicetimelinetable.cpp" line="139"/>
         <source>No data!</source>
         <translation>无记录！</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="132"/>
-        <location filename="servicetimelinetable.cpp" line="138"/>
-        <location filename="servicetimelinetable.cpp" line="144"/>
-        <location filename="servicetimelinetable.cpp" line="237"/>
-        <location filename="servicetimelinetable.cpp" line="247"/>
-        <location filename="servicetimelinetable.cpp" line="331"/>
+        <location filename="servicetimelinetable.cpp" line="147"/>
+        <location filename="servicetimelinetable.cpp" line="153"/>
+        <location filename="servicetimelinetable.cpp" line="159"/>
+        <location filename="servicetimelinetable.cpp" line="252"/>
+        <location filename="servicetimelinetable.cpp" line="262"/>
+        <location filename="servicetimelinetable.cpp" line="371"/>
         <source>Return json format error!</source>
         <translation>返回结果格式错误！</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="218"/>
+        <location filename="servicetimelinetable.cpp" line="233"/>
         <source>Reset password</source>
         <translation>密码重置</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="221"/>
+        <location filename="servicetimelinetable.cpp" line="236"/>
         <source>Relieves loss</source>
         <translation>解除挂失</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="224"/>
+        <location filename="servicetimelinetable.cpp" line="239"/>
         <source>Free settlement record</source>
         <translation>无卡结算备案</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="255"/>
+        <location filename="servicetimelinetable.cpp" line="270"/>
         <source>Id</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="258"/>
+        <location filename="servicetimelinetable.cpp" line="273"/>
         <source>Agent Name</source>
         <translation>代办人姓名</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="259"/>
+        <location filename="servicetimelinetable.cpp" line="274"/>
         <source>Agent Code</source>
         <translation>代办人身份证号</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="260"/>
+        <location filename="servicetimelinetable.cpp" line="275"/>
         <source>Update Time</source>
         <translation>办理时间</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="261"/>
+        <location filename="servicetimelinetable.cpp" line="276"/>
         <source>Type</source>
         <translation>业务类型</translation>
     </message>
     <message>
-        <location filename="servicetimelinetable.cpp" line="325"/>
+        <location filename="servicetimelinetable.cpp" line="365"/>
         <source>Data error!</source>
         <translation>数据错误！</translation>
     </message>
@@ -230,7 +250,7 @@
     <name>TakePhotos</name>
     <message>
         <location filename="TakePhotos.cpp" line="32"/>
-        <location filename="TakePhotos.cpp" line="650"/>
+        <location filename="TakePhotos.cpp" line="658"/>
         <source>Server status: Error</source>
         <translation>服务器状态：错误</translation>
     </message>
@@ -273,12 +293,12 @@
         <location filename="TakePhotos.cpp" line="365"/>
         <location filename="TakePhotos.cpp" line="388"/>
         <location filename="TakePhotos.cpp" line="498"/>
-        <location filename="TakePhotos.cpp" line="658"/>
-        <location filename="TakePhotos.cpp" line="664"/>
-        <location filename="TakePhotos.cpp" line="763"/>
-        <location filename="TakePhotos.cpp" line="807"/>
-        <location filename="TakePhotos.cpp" line="820"/>
-        <location filename="TakePhotos.cpp" line="875"/>
+        <location filename="TakePhotos.cpp" line="666"/>
+        <location filename="TakePhotos.cpp" line="672"/>
+        <location filename="TakePhotos.cpp" line="771"/>
+        <location filename="TakePhotos.cpp" line="815"/>
+        <location filename="TakePhotos.cpp" line="828"/>
+        <location filename="TakePhotos.cpp" line="883"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -330,63 +350,63 @@
         <translation>摄像头状态：正常</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="612"/>
-        <location filename="TakePhotos.cpp" line="628"/>
+        <location filename="TakePhotos.cpp" line="617"/>
+        <location filename="TakePhotos.cpp" line="636"/>
         <source>Take Photo</source>
         <translation>拍摄</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="623"/>
+        <location filename="TakePhotos.cpp" line="630"/>
         <source>Clean Photo</source>
         <translation>重新拍摄</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="646"/>
+        <location filename="TakePhotos.cpp" line="654"/>
         <source>Server status: Ok</source>
         <translation>服务器状态：正常</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="658"/>
+        <location filename="TakePhotos.cpp" line="666"/>
         <source>Please take the photo first !</source>
         <translation>请先拍照！</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="664"/>
+        <location filename="TakePhotos.cpp" line="672"/>
         <source>Transactor information invalid !</source>
         <translation>办理者信息错误！</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="757"/>
+        <location filename="TakePhotos.cpp" line="765"/>
         <source>Success</source>
         <translation>成功</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="757"/>
+        <location filename="TakePhotos.cpp" line="765"/>
         <source>Submit Success</source>
         <translation>上传成功</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="807"/>
+        <location filename="TakePhotos.cpp" line="815"/>
         <source>Handle photo is not null !</source>
         <translation>办理照片不能为空！</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="820"/>
+        <location filename="TakePhotos.cpp" line="828"/>
         <source>Can not create temporary directory !</source>
         <translation>无法创建临时文件夹！</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="875"/>
+        <location filename="TakePhotos.cpp" line="883"/>
         <source>Can not save temporary imge!</source>
         <translation>不能创建临时图片！</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="896"/>
+        <location filename="TakePhotos.cpp" line="904"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="TakePhotos.cpp" line="896"/>
+        <location filename="TakePhotos.cpp" line="904"/>
         <source>ID card expired!</source>
         <translation>身份证已过期！</translation>
     </message>

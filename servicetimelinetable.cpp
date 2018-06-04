@@ -9,6 +9,7 @@
 #include <QContextMenuEvent>
 #include <QTableWidgetItem>
 #include <QPoint>
+#include <QClipboard>
 #include <string>
 #include "submitdata.h"
 
@@ -28,6 +29,15 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
     menu=new QMenu();
     viewPhoto=new QAction(tr("Display Photos"));
 
+    copyTransactorName=new QAction(tr("Copy transactor name"));
+
+    copyTransactorCode=new QAction(tr("Copy transactor code"));
+
+    copyAgentName=new QAction(tr("Copy agent name"));
+
+    copyAgentCode=new QAction(tr("Copy agent code"));
+
+
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnCount(7);
     //ui->tableWidget->setHorizontalHeaderLabels(header);
@@ -45,6 +55,11 @@ ServiceTimeLineTable::ServiceTimeLineTable(QWidget *parent) :
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Search()));
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(clear()));
     connect(this->viewPhoto,SIGNAL(triggered()),this,SLOT(DisplayPhotos()));
+    connect(ui->tableWidget,SIGNAL(cellDoubleClicked(int,int)),this,SLOT(DisplayPhotos()));
+    connect(this->copyTransactorName,SIGNAL(triggered()),this,SLOT(SetTransactorNameToClipboard()));
+    connect(this->copyTransactorCode,SIGNAL(triggered()),this,SLOT(SetTransactorCodeToClipboard()));
+    connect(this->copyAgentName,SIGNAL(triggered()),this,SLOT(SetAgentNameToClipboard()));
+    connect(this->copyAgentCode,SIGNAL(triggered()),this,SLOT(SetAgentCodeToClipboard()));
 }
 
 ServiceTimeLineTable::~ServiceTimeLineTable()
@@ -277,11 +292,36 @@ void ServiceTimeLineTable::clear()
 void ServiceTimeLineTable::contextMenuEvent(QContextMenuEvent *event)
 {
     menu->clear(); //清除原有菜单
-    //QPoint point = event->pos(); //得到窗口坐标
+    QPoint point = event->pos()
+            -QPoint(ui->tableWidget->x(),ui->tableWidget->y())
+            -QPoint(0,ui->tableWidget->horizontalHeader()->height()); //得到窗口坐标
     //QTableWidgetItem *item = ui->tableWidget->itemAt(point);
-    menu->addAction(viewPhoto);
-    menu->exec(QCursor::pos());
-    event->accept();
+    int row=-1;
+    row=ui->tableWidget->rowAt(point.y());
+    //QMessageBox::critical(this,"test",QString::number(row));
+    //QMessageBox::critical(this,"test",ui->tableWidget->item(0,0)->text());
+    if(row>=0&&ui->tableWidget->item(row,0)!=NULL)
+    {
+        menu->addAction(viewPhoto);
+        if(ui->tableWidget->item(row,1)!=NULL)
+        {
+            menu->addAction(copyTransactorName);
+        }
+        if(ui->tableWidget->item(row,2)!=NULL)
+        {
+            menu->addAction(copyTransactorCode);
+        }
+        if(ui->tableWidget->item(row,3)!=NULL)
+        {
+            menu->addAction(copyAgentName);
+        }
+        if(ui->tableWidget->item(row,4)!=NULL)
+        {
+            menu->addAction(copyAgentCode);
+        }
+        menu->exec(QCursor::pos());
+        event->accept();
+    }
 }
 
 void ServiceTimeLineTable::DisplayPhotos()
@@ -399,4 +439,56 @@ void ServiceTimeLineTable::DisplayPhotos()
     }
     viewer->show();
 
+}
+
+void ServiceTimeLineTable::SetTransactorNameToClipboard()
+{
+    QList<QTableWidgetItem*>items = ui->tableWidget->selectedItems();
+    if(items.count()<1)
+    {
+        return;
+    }
+    //QMessageBox::critical(this,"test",items.at(1)->text());
+    QClipboard *board = QApplication::clipboard();
+    board->setText(items.at(1)->text());
+    //items.at(col)->text();
+}
+
+void ServiceTimeLineTable::SetTransactorCodeToClipboard()
+{
+    QList<QTableWidgetItem*>items = ui->tableWidget->selectedItems();
+    if(items.count()<1)
+    {
+        return;
+    }
+    //QMessageBox::critical(this,"test",items.at(1)->text());
+    QClipboard *board = QApplication::clipboard();
+    board->setText(items.at(2)->text());
+    //items.at(col)->text();
+}
+
+void ServiceTimeLineTable::SetAgentNameToClipboard()
+{
+    QList<QTableWidgetItem*>items = ui->tableWidget->selectedItems();
+    if(items.count()<1)
+    {
+        return;
+    }
+    //QMessageBox::critical(this,"test",items.at(1)->text());
+    QClipboard *board = QApplication::clipboard();
+    board->setText(items.at(3)->text());
+    //items.at(col)->text();
+}
+
+void ServiceTimeLineTable::SetAgentCodeToClipboard()
+{
+    QList<QTableWidgetItem*>items = ui->tableWidget->selectedItems();
+    if(items.count()<1)
+    {
+        return;
+    }
+    //QMessageBox::critical(this,"test",items.at(1)->text());
+    QClipboard *board = QApplication::clipboard();
+    board->setText(items.at(4)->text());
+    //items.at(col)->text();
 }

@@ -22,11 +22,19 @@ public slots:
     void FillinTable(QString json);
     void clear();
     void DisplayPhotos();
+    void SetTransactorNameToClipboard();
+    void SetTransactorCodeToClipboard();
+    void SetAgentNameToClipboard();
+    void SetAgentCodeToClipboard();
 
 private:
     void SetHerader();
     QMenu *menu;
     QAction *viewPhoto;
+    QAction *copyTransactorName;
+    QAction *copyTransactorCode;
+    QAction *copyAgentCode;
+    QAction *copyAgentName;
     Ui::ServiceTimeLineTable *ui;
     HistoryViewer *viewer;
 
